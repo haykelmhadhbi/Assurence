@@ -6,16 +6,16 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
+
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Assurance implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAssurance;
     private String designation;
     private float montant;
@@ -24,4 +24,46 @@ public class Assurance implements Serializable {
     @ManyToOne
     private Contrat contrat;
 
+    // Getters and Setters
+    public int getIdAssurance() {
+        return idAssurance;
+    }
+
+    public void setIdAssurance(int idAssurance) {
+        this.idAssurance = idAssurance;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public float getMontant() {
+        return montant;
+    }
+
+    public void setMontant(float montant) {
+        this.montant = montant;
+    }
+
+    public Beneficiaire getBeneficiaire() {
+        return beneficiaire;
+    }
+
+    public void setBeneficiaire(Beneficiaire beneficiaire) {
+        this.beneficiaire = beneficiaire;
+    }
+
+    public Contrat getContrat() {
+        return contrat;
+    }
+
+    public void setContrat(Contrat contrat) {
+        this.contrat = contrat;
+    }
 }
+
+

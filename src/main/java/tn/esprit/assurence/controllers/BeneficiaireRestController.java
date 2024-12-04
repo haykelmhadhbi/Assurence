@@ -3,11 +3,10 @@ package tn.esprit.assurence.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tn.esprit.assurence.entites.Assurance;
 import tn.esprit.assurence.entites.Beneficiaire;
+import tn.esprit.assurence.services.AssurenceServices;
 import tn.esprit.assurence.services.BeneficiaireServices;
 
 @RestController
@@ -16,6 +15,7 @@ import tn.esprit.assurence.services.BeneficiaireServices;
 
 public class BeneficiaireRestController {
     private final BeneficiaireServices beneficiaireServices;
+    private  final AssurenceServices assurenceServices;
 
     @PostMapping("/ajouter")
     public ResponseEntity<String> ajouterBeneficiaire(@RequestBody Beneficiaire beneficiaire) {
@@ -26,5 +26,13 @@ public class BeneficiaireRestController {
         } else {
             return ResponseEntity.status(500).body("Échec de l'ajout du bénéficiaire.");
         }
+    }
+
+    @PostMapping("/ajouterAssurence/{cinBf}")
+    public ResponseEntity<Integer> ajouterAssurance(
+            @RequestBody Assurance a,
+            @PathVariable int cinBf) {
+        int idAssurance = assurenceServices.ajouterAssurance(a, cinBf);
+        return ResponseEntity.ok(idAssurance);
     }
 }
